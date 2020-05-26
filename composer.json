@@ -20,7 +20,7 @@
 	"require": {
 		"ext-dom": "*",
 		"ext-libxml": "*",
-		"typo3/cms-core": "^9.5 || ^10.4"
+		"typo3/cms-core": "^9.5.14 || ^10.4.3"
 	},
 	"require-dev": {
 		"friendsofphp/php-cs-fixer": "^2.0",
