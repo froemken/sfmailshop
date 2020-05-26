@@ -1,0 +1,151 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:layout name="Default" />
+
+<f:section name="main">
+    <f:render partial="FlashMessages" />
+
+    <div class="frame-layout-100 text-right">
+        <div class="grid">
+            <div class="col-6 text-left">
+                <f:link.action action="list"
+                               controller="Shop">
+                    Zurück zum Shop
+                </f:link.action>
+            </div>
+            <div class="col-6 text-right">
+                <f:link.action action="clearCart"
+                               controller="Shop">
+                    Warenkorb leeren
+                </f:link.action>
+            </div>
+        </div>
+    </div>
+
+    <f:form action="checkout" object="{cart}" name="cart" method="post" enctype="multipart/form-data">
+        <table>
+            <thead>
+            <tr>
+                <th>Aktion</th>
+                <th>Titel</th>
+                <th colspan="2">Variante</th>
+            </tr>
+            </thead>
+            <tbody>
+            <f:for each="{cart.products}" as="product" iteration="productIterator">
+                <f:form.hidden property="products.{productIterator.index}.realProduct.title"
+                               value="{product.realProduct.title}" />
+                <tr>
+                    <td>
+                        <f:link.action action="cart"
+                                       class="addSubToCart"
+                                       data="{host: host, product-uid: product.uid, variant-uid: variant.uid, method: 'addToCart', reload: 1}">Weiteres Exemplar</f:link.action>
+                    </td>
+                    <td>{product.title}</td>
+                    <td colspan="2">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Farbe</th>
+                                <th>Größe</th>
+                                <th>Schriftzug</th>
+                                <th>Preis</th>
+                                <th>Aktion</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <f:for each="{product.variants}" as="variant" iteration="variantIterator">
+                                <f:form.hidden property="products.{productIterator.index}.variants.{variantIterator.index}.realVariant.title"
+                                               value="{variant.realVariant.title}" />
+                                <tr>
+                                    <td>{variant.realVariant.title}</td>
+                                    <td>
+                                        <f:if condition="{variant.realVariant.color -> f:count()}">
+                                            <f:render section="renderTextOrSelect"
+                                                      arguments="{options: variant.realVariant.color, variant: variant.realVariant, product: product.realProduct, productIterator: productIterator, variantIterator: variantIterator, label: 'Farbe', name: 'selectedColor'}" />
+                                        </f:if>
+                                    </td>
+                                    <td>
+                                        <f:if condition="{variant.realVariant.sizes -> f:count()}">
+                                            <f:render section="renderTextOrSelect"
+                                                      arguments="{options: variant.realVariant.sizes, variant: variant.realVariant, product: product.realProduct, productIterator: productIterator, variantIterator: variantIterator, label: 'Größe', name: 'selectedSize'}" />
+                                        </f:if>
+                                    </td>
+                                    <td>
+                                        <f:if condition="{variant.realVariant.hasLettering}">
+                                            <f:form.textfield property="products.{uid}.lettering" />
+                                        </f:if>
+                                    </td>
+                                    <td>
+                                        <f:render partial="General" section="renderPrice" arguments="{price: variant.realVariant.price}" />
+                                    </td>
+                                    <td>
+                                        <f:link.action action="cart"
+                                                       class="addSubToCart"
+                                                       data="{host: host, product-uid: uid, variant-uid: variant.uid, position: position, method: 'removeFromCart', reload: 1}">Entfernen</f:link.action>
+
+                                    </td>
+                                </tr>
+                            </f:for>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </f:for>
+            <tr>
+                <td colspan="2">&nbsp;</td>
+                <td><strong>Summe:</strong></td>
+                <td>
+                    <strong>
+                        <f:render partial="General" section="renderPrice" arguments="{price: cart.priceTotal}" />
+                    </strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <dl>
+            <dt><label>Mitgliedsnummer</label></dt>
+            <dd><f:form.textfield property="memberId" /></dd>
+            <dt><label>Vorname</label></dt>
+            <dd><f:form.textfield property="firstName" /></dd>
+            <dt><label>Nachname</label></dt>
+            <dd><f:form.textfield property="lastName" /></dd>
+            <dt><label>Email</label></dt>
+            <dd><f:form.textfield property="email" /></dd>
+            <dt><label>Straße + Hs-Nr</label></dt>
+            <dd><f:form.textfield property="address" /></dd>
+            <dt><label>PLZ</label></dt>
+            <dd><f:form.textfield property="zip" /></dd>
+            <dt><label>Ort</label></dt>
+            <dd><f:form.textfield property="city" /></dd>
+        </dl>
+
+        <button type="submit" class="btn btn-primary">Kostenpflichtig bestellen</button>
+    </f:form>
+</f:section>
+
+<f:section name="renderTextOrSelect">
+    <f:if condition="{options -> f:count()} == 1">
+        <f:then>
+            <f:for each="{options}" as="option" iteration="iterator">
+                <f:if condition="iterator.isFirst">
+                    {option.title}
+                </f:if>
+            </f:for>
+        </f:then>
+        <f:else>
+            <div class="form-group">
+                <div class="select">
+                    <f:form.select property="products.{productIterator.index}.variants.{variantIterator.index}.{name}"
+                                   class="form-control"
+                                   optionLabelField="title"
+                                   optionValueField="uid"
+                                   options="{options}" />
+                </div>
+            </div>
+        </f:else>
+    </f:if>
+</f:section>

@@ -1,0 +1,15 @@
+# ==============================================
+# Persistence object mapping configuration
+# ==============================================
+config.tx_extbase.persistence.classes {
+    StefanFroemken\Sfmailshop\Domain\Model\Order\Product {
+        mapping {
+            tableName = tx_sfmailshop_domain_model_product
+        }
+    }
+    StefanFroemken\Sfmailshop\Domain\Model\Order\Variant {
+        mapping {
+            tableName = tx_sfmailshop_domain_model_variant
+        }
+    }
+}

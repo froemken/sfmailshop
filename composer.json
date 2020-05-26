@@ -1,0 +1,34 @@
+{
+	"name": "stefanfroemken/sfmailshop",
+	"type": "typo3-cms-extension",
+	"description": "Creates an extremely simple shop without payment.",
+	"license": "GPL-2.0-or-later",
+	"keywords": ["typo3", "TYPO3 CMS", "shop", "mail"],
+	"homepage": "https://www.typo3lexikon.de",
+	"authors": [
+		{
+			"name": "Stefan Froemken",
+			"email": "froemken@gmail.com",
+			"role": "Lead Developer"
+		}
+	],
+	"support": {
+		"email": "froemken@gmail.com",
+		"issues": "https://github.com/froemken/sfmailshop/issues",
+		"source": "https://github.com/froemken/sfmailshop"
+	},
+	"require": {
+		"ext-dom": "*",
+		"ext-libxml": "*",
+		"typo3/cms-core": "^9.5 || ^10.4"
+	},
+	"require-dev": {
+		"friendsofphp/php-cs-fixer": "^2.0",
+		"nimut/testing-framework": "^4.1"
+	},
+	"autoload": {
+		"psr-4": {
+			"StefanFroemken\\Sfmailshop\\": "Classes"
+		}
+	}
+}

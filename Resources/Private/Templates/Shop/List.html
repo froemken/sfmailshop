@@ -1,0 +1,123 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:layout name="Default" />
+
+<f:section name="main">
+    <f:render partial="FlashMessages" />
+
+    <div class="frame-layout-100 text-right">
+        <f:link.action action="cart"
+                       controller="Shop">
+            Hier geht es zum Warenkorb
+        </f:link.action>
+    </div>
+    <f:widget.paginate objects="{products}" as="paginatedProducts">
+        <f:for each="{paginatedProducts}" as="product">
+            <div class="grid frame frame-ruler-after">
+                <div class="col-3">
+                    <f:for each="{product.images}" as="image" iteration="iterator">
+                        <f:if condition="{iterator.isFirst}">
+                            <f:image image="{image}" width="327" />
+                        </f:if>
+                    </f:for>
+                </div>
+                <div class="col-9">
+                    <f:if condition="{product.variants -> f:count()} == 0">
+                        <f:then>
+                            <f:render section="noVariant" arguments="{product: product}" />
+                        </f:then>
+                        <f:else if="{product.variants -> f:count()} == 1">
+                            <f:render section="oneVariant" arguments="{product: product}" />
+                        </f:else>
+                        <f:else>
+                            <f:render section="allVariants" arguments="{product: product}" />
+                        </f:else>
+                    </f:if>
+                </div>
+                <div class="col-12 text-right form-group">
+                    <f:if condition="{product.variants -> f:count()} == 0">
+                        <f:then>
+                            <button class="btn btn-primary addSubToCart"
+                                    data-host="{host}"
+                                    data-page-id="{pageId}"
+                                    data-method="addToCart"
+                                    data-product-uid="{product.uid}"
+                                    data-product-title="{product.title}">
+                                {f:translate(key: 'addToCart')}
+                            </button>
+                        </f:then>
+                        <f:else>
+                            <f:for each="{product.variants}" as="variant">
+                                <div class="grid">
+                                    <div class="col-7">{variant.title}</div>
+                                    <div class="col-2"><f:render partial="General" section="renderPrice" arguments="{price: variant.price}" /></div>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary addSubToCart"
+                                                data-host="{host}"
+                                                data-page-id="{pageId}"
+                                                data-method="addToCart"
+                                                data-product-uid="{product.uid}"
+                                                data-variant-uid="{variant.uid}"
+                                                data-product-title="{product.title}">
+                                            {f:translate(key: 'addToCart')}
+                                        </button>
+                                    </div>
+                                </div>
+                            </f:for>
+                        </f:else>
+                    </f:if>
+                </div>
+            </div>
+        </f:for>
+    </f:widget.paginate>
+    <div class="frame-layout-100 text-right">
+        <f:link.action action="cart"
+                       controller="Shop">
+            Hier geht es zum Warenkorb
+        </f:link.action>
+    </div>
+</f:section>
+
+<f:section name="noVariant">
+    <header>
+        <h2>{product.title}</h2>
+    </header>
+    <div class="ce-textpic ce-left ce-intext">
+        {product.description}
+    </div>
+    <ul>
+        <li>Artikelnummer: {product.articleNumber}</li>
+        <li>Preis: <f:render partial="General" section="renderPrice" arguments="{price: product.price}" /></li>
+    </ul>
+</f:section>
+
+<f:section name="oneVariant">
+    <f:for each="{product.variants}" as="variant" iteration="iterator">
+        <f:if condition="{iterator.isFirst}">
+            <header>
+                <h2>{f:if(condition: variant.title, then: variant.title, else: product.title)}</h2>
+            </header>
+            <div class="ce-textpic ce-left ce-intext">
+                {product.description}
+            </div>
+            <ul>
+                <li>Artikelnummer: {product.articleNumber}</li>
+                <li>Preis: <f:render partial="General" section="renderPrice" arguments="{price: '{f:if(condition: variant.price, then: variant.price, else: product.price)}'}" /></li>
+            </ul>
+        </f:if>
+    </f:for>
+</f:section>
+
+<f:section name="allVariants">
+    <header>
+        <h2>{product.title}</h2>
+    </header>
+    <div class="ce-textpic ce-left ce-intext">
+        {product.description}
+    </div>
+    <ul>
+        <li>Artikelnummer: {product.articleNumber}</li>
+        <li>Preis: <f:render partial="General" section="renderPrice" arguments="{price: product.price}" /></li>
+    </ul>
+</f:section>

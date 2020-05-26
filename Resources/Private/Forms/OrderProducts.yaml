@@ -1,0 +1,11 @@
+type: Form
+identifier: 'example-form'
+label: 'TYPO3 is cool'
+prototypeName: standard
+renderingOptions:
+  controllerAction: list
+  addQueryString: false
+  argumentsToBeExcludedFromQueryString: []
+  additionalParams: []
+
+renderables:

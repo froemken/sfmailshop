@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2020-04-11T08:57:40Z" product-name="sfmailshop">
+		<header/>
+		<body>
+			<trans-unit id="plugin.sfmailshop.title" xml:space="preserve">
+				<source>SF Mail Shop</source>
+				<target>SF Mail Shop</target>
+			</trans-unit>
+
+			<trans-unit id="tx_sfmailshop_domain_model_product" xml:space="preserve">
+				<source>Product</source>
+				<target>Produkt</target>
+			</trans-unit>
+			<trans-unit id="tx_sfmailshop_domain_model_product.title" xml:space="preserve">
+				<source>Title</source>
+				<target>Titel</target>
+			</trans-unit>
+			<trans-unit id="tx_sfmailshop_domain_model_product.is_top_product" xml:space="preserve">
+				<source>Top product</source>
+				<target>Top Produkt</target>
+			</trans-unit>
+			<trans-unit id="tx_sfmailshop_domain_model_product.article_number" xml:space="preserve">
+				<source>Article number</source>
+				<target>Artikelnummer</target>
+			</trans-unit>
+			<trans-unit id="tx_sfmailshop_domain_model_product.description" xml:space="preserve">
+				<source>Description</source>
+				<target>Beschreibung</target>
+			</trans-unit>
+			<trans-unit id="tx_sfmailshop_domain_model_product.images" xml:space="preserve">
+				<source>Images</source>
+				<target>Bilder</target>
+			</trans-unit>
+			<trans-unit id="tx_sfmailshop_domain_model_product.price" xml:space="preserve">
+				<source>Price</source>
+				<target>Preis</target>
+			</trans-unit>
+			<trans-unit id="tx_sfmailshop_domain_model_product.stock" xml:space="preserve">
+				<source>Stock</source>
+				<target>Bestand</target>
+			</trans-unit>
+			<trans-unit id="tx_sfmailshop_domain_model_product.variants" xml:space="preserve">
+				<source>Variants</source>
+				<target>Varianten</target>
+			</trans-unit>
+
+			<trans-unit id="tx_sfmailshop_domain_model_variant" xml:space="preserve">
+				<source>Variant</source>
+				<target>Variante</target>
+			</trans-unit>
+			<trans-unit id="tx_sfmailshop_domain_model_variant.title" xml:space="preserve">
+				<source>Title</source>
+				<target>Titel</target>
+			</trans-unit>
+			<trans-unit id="tx_sfmailshop_domain_model_variant.price" xml:space="preserve">
+				<source>Price</source>
+				<target>Preis</target>
+			</trans-unit>
+			<trans-unit id="tx_sfmailshop_domain_model_variant.stock" xml:space="preserve">
+				<source>Stock</source>
+				<target>Bestand</target>
+			</trans-unit>
+			<trans-unit id="tx_sfmailshop_domain_model_variant.color" xml:space="preserve">
+				<source>Color</source>
+				<target>Farbe</target>
+			</trans-unit>
+			<trans-unit id="tx_sfmailshop_domain_model_variant.size" xml:space="preserve">
+				<source>Size</source>
+				<target>Größe</target>
+			</trans-unit>
+			<trans-unit id="tx_sfmailshop_domain_model_variant.has_lettering" xml:space="preserve">
+				<source>Has lettering</source>
+				<target>Hat Schriftzug</target>
+			</trans-unit>
+
+			<trans-unit id="tx_sfmailshop_domain_model_color" xml:space="preserve">
+				<source>Colors</source>
+				<target>Farben</target>
+			</trans-unit>
+			<trans-unit id="tx_sfmailshop_domain_model_color.title" xml:space="preserve">
+				<source>Title</source>
+				<target>Titel</target>
+			</trans-unit>
+
+			<trans-unit id="tx_sfmailshop_domain_model_size" xml:space="preserve">
+				<source>Sizes</source>
+				<target>Größen</target>
+			</trans-unit>
+			<trans-unit id="tx_sfmailshop_domain_model_size.title" xml:space="preserve">
+				<source>Title</source>
+				<target>Titel</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

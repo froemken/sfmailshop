@@ -1,0 +1,37 @@
+page.includeJSFooter {
+  sfmailshop-main = EXT:sfmailshop/Resources/Public/JavaScript/main.js
+}
+
+plugin.tx_sfmailshop {
+  view {
+    templateRootPaths {
+      0 = EXT:sfmailshop/Resources/Private/Templates/
+      1 = {$plugin.tx_sfmailshop.view.templateRootPath}
+    }
+    partialRootPaths {
+      0 = EXT:sfmailshop/Resources/Private/Partials/
+      1 = {$plugin.tx_sfmailshop.view.partialRootPath}
+    }
+    layoutRootPaths {
+      0 = EXT:sfmailshop/Resources/Private/Layouts/
+      1 = {$plugin.tx_sfmailshop.view.layoutRootPath}
+    }
+  }
+  persistence {
+    storagePid = {$plugin.tx_sfmailshop.persistence.storagePid}
+  }
+  settings {
+  }
+}
+
+plugin.tx_sfmailshop._CSS_DEFAULT_STYLE (
+  textarea.f3-form-error {
+    background-color:#FF9F9F;
+    border: 1px #FF0000 solid;
+  }
+
+  input.f3-form-error {
+    background-color:#FF9F9F;
+    border: 1px #FF0000 solid;
+  }
+)
