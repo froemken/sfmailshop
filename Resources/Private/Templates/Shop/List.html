@@ -7,11 +7,22 @@
     <f:render partial="FlashMessages" />
 
     <div class="frame-layout-100 text-right">
-        <f:link.action action="cart"
-                       controller="Shop">
-            Hier geht es zum Warenkorb
-        </f:link.action>
+        <div class="grid">
+            <div class="col-6 text-left">
+                <f:link.action action="clearCart"
+                               controller="Shop">
+                    Warenkorb leeren
+                </f:link.action>
+            </div>
+            <div class="col-6 text-right">
+                <f:link.action action="cart"
+                               controller="Shop">
+                    Hier geht es zum Warenkorb
+                </f:link.action>
+            </div>
+        </div>
     </div>
+
     <f:widget.paginate objects="{products}" as="paginatedProducts">
         <f:for each="{paginatedProducts}" as="product">
             <div class="grid frame frame-ruler-after">

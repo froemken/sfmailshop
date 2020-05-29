@@ -17,6 +17,7 @@ namespace StefanFroemken\Sfmailshop\Domain\Model\Order;
 
 use SJBR\StaticInfoTables\Domain\Model\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * This is a special product used for checkout.
@@ -24,6 +25,11 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Product extends AbstractEntity
 {
+    /**
+     * @var int
+     */
+    protected $amount = 0;
+
     /**
      * @var \StefanFroemken\Sfmailshop\Domain\Model\Product
      */
@@ -39,6 +45,26 @@ class Product extends AbstractEntity
     public function __construct()
     {
         $this->variants = new ObjectStorage();
+    }
+
+    /**
+     * @return int
+     */
+    public function getAmount(): int
+    {
+        $amount = $this->amount;
+        if ($this->getVariants()->count()) {
+            $amount = $this->getVariants()->count();
+        }
+        return $amount;
+    }
+
+    /**
+     * @param int $amount
+     */
+    public function setAmount(int $amount): void
+    {
+        $this->amount = $amount;
     }
 
     /**
@@ -87,5 +113,53 @@ class Product extends AbstractEntity
     public function removeVariant(Variant $variant)
     {
         $this->variants->detach($variant);
+    }
+
+    public function getTitle(): string
+    {
+        $title = $this->getRealProduct()->getTitle();
+        DebuggerUtility::var_dump($title, 'P. Title');
+        if ($this->getVariants()->count()) {
+            $this->getVariants()->rewind();
+
+            /** @var Variant $variant */
+            $variant = $this->getVariants()->current();
+            if ($variant->getRealVariant()->getTitle()) {
+                $title = $variant->getRealVariant()->getTitle();
+                DebuggerUtility::var_dump($title, 'V. Title');
+            }
+        }
+
+        return $title;
+    }
+
+    public function getPrice(): string
+    {
+        $price = $this->getRealProduct()->getPrice();
+        if ($this->getVariants()->count()) {
+            $this->getVariants()->rewind();
+
+            /** @var Variant $variant */
+            $variant = $this->getVariants()->current();
+            if ($variant->getRealVariant()->getPrice()) {
+                $price = $variant->getRealVariant()->getPrice();
+            }
+        }
+        return $price;
+    }
+
+    public function getPriceTotal(): float
+    {
+        $priceTotal = 0;
+        if ($this->getVariants()->count()) {
+            foreach ($this->getVariants() as $variant) {
+                $price = (int)str_replace(',', '.', $variant->getRealVariant()->getPrice());
+                $priceTotal += ($price * 100);
+            }
+        } else {
+            $price = (int)str_replace(',', '.', $this->getRealProduct()->getPrice());
+            $priceTotal += ($price * $this->getAmount() * 100);
+        }
+        return $priceTotal / 100;
     }
 }

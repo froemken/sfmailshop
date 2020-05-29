@@ -1,8 +1,10 @@
 # cat=email; type=string; label=LLL:EXT:sfmailshop/Resources/Private/Language/ExtConf.xlf:emailFromAddress
 emailFromAddress =
-# cat=email; type=string; label=LLL:EXT:sfmailshop2/Resources/Private/Language/ExtConf.xlf:emailFromName
+# cat=email; type=string; label=LLL:EXT:sfmailshop/Resources/Private/Language/ExtConf.xlf:emailFromName
 emailFromName =
-# cat=email; type=string; label=LLL:EXT:sfmailshop2/Resources/Private/Language/ExtConf.xlf:emailToAddress
+# cat=email; type=string; label=LLL:EXT:sfmailshop/Resources/Private/Language/ExtConf.xlf:emailToAddress
 emailToAddress =
-# cat=email; type=string; label=LLL:EXT:sfmailshop2/Resources/Private/Language/ExtConf.xlf:emailToName
+# cat=email; type=string; label=LLL:EXT:sfmailshop/Resources/Private/Language/ExtConf.xlf:emailToName
 emailToName =
+# cat=email; type=string; label=LLL:EXT:sfmailshop/Resources/Private/Language/ExtConf.xlf:emailSubject
+emailSubject =

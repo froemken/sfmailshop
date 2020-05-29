@@ -2,7 +2,9 @@
     <f:for each="{flashMessages}" as="flashMessage">
         <div class="frame frame-layout-100">
             <header>
-                <h3>{flashMessage.title}</h3>
+                <f:if condition="{flashMessage.title}">
+                    <h3>{flashMessage.title}</h3>
+                </f:if>
                 <div>{flashMessage.message}</div>
             </header>
         </div>

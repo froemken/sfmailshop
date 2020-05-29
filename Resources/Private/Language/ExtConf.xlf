@@ -15,6 +15,9 @@
 			<trans-unit id="emailToName" xml:space="preserve">
 				<source>email to name: The recipients email name.</source>
 			</trans-unit>
+			<trans-unit id="emailSubject" xml:space="preserve">
+				<source>email subject: The subject of the order mail.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

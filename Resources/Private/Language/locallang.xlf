@@ -3,8 +3,82 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2020-04-11T08:57:40Z" product-name="sfmailshop">
 		<header/>
 		<body>
+			<trans-unit id="backToShop">
+				<source>Back to Shop</source>
+			</trans-unit>
+			<trans-unit id="emptyCart">
+				<source>Empty Cart</source>
+			</trans-unit>
 			<trans-unit id="addToCart">
-				<source>Add to cart</source>
+				<source>Add</source>
+			</trans-unit>
+			<trans-unit id="removeFromCart">
+				<source>Remove</source>
+			</trans-unit>
+			<trans-unit id="color">
+				<source>Color</source>
+			</trans-unit>
+			<trans-unit id="size">
+				<source>Size</source>
+			</trans-unit>
+			<trans-unit id="lettering">
+				<source>Lettering</source>
+			</trans-unit>
+			<trans-unit id="amount">
+				<source>Amount</source>
+			</trans-unit>
+			<trans-unit id="priceSingle">
+				<source>Price single</source>
+			</trans-unit>
+			<trans-unit id="priceTotal">
+				<source>Price total</source>
+			</trans-unit>
+			<trans-unit id="sum">
+				<source>Sum</source>
+			</trans-unit>
+			<trans-unit id="noProducts">
+				<source>no products choosen</source>
+			</trans-unit>
+			<trans-unit id="orderWithCosts">
+				<source>Order with Costs</source>
+			</trans-unit>
+
+			<trans-unit id="memberData">
+				<source>Member data</source>
+			</trans-unit>
+			<trans-unit id="memberId">
+				<source>Member number</source>
+			</trans-unit>
+			<trans-unit id="firstName">
+				<source>Firstname</source>
+			</trans-unit>
+			<trans-unit id="lastName">
+				<source>Lastname</source>
+			</trans-unit>
+			<trans-unit id="address">
+				<source>Address</source>
+			</trans-unit>
+			<trans-unit id="zip">
+				<source>Zip</source>
+			</trans-unit>
+			<trans-unit id="city">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="email">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="orderDate">
+				<source>Order date</source>
+			</trans-unit>
+
+			<trans-unit id="productOrder">
+				<source>Product Order</source>
+			</trans-unit>
+			<trans-unit id="title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="articleNumber">
+				<source>Article number</source>
 			</trans-unit>
 		</body>
 	</file>

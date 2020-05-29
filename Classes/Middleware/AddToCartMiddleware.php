@@ -69,6 +69,9 @@ class AddToCartMiddleware implements MiddlewareInterface
                 if ($products[$productUid][$variantUid]['amount'] > 0) {
                     $products[$productUid][$variantUid]['amount'] -= 1;
                 }
+                if (empty($products[$productUid][$variantUid]['amount'])) {
+                    unset($products[$productUid][$variantUid]);
+                }
                 break;
             default:
                 // There is no default

@@ -3,9 +3,111 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2020-04-11T08:57:40Z" product-name="sfmailshop">
 		<header/>
 		<body>
+			<trans-unit id="backToShop">
+				<source>Back to Shop</source>
+				<target>Zurück zum Shop</target>
+			</trans-unit>
+			<trans-unit id="emptyCart">
+				<source>Empty Cart</source>
+				<target>Warenkorb leeren</target>
+			</trans-unit>
 			<trans-unit id="addToCart">
-				<source>Add to cart</source>
-				<target>Zum Warenkorb hinzufügen</target>
+				<source>Add</source>
+				<target>Hinzufügen</target>
+			</trans-unit>
+			<trans-unit id="removeFromCart">
+				<source>Remove</source>
+				<target>Entfernen</target>
+			</trans-unit>
+			<trans-unit id="color">
+				<source>Color</source>
+				<target>Farbe</target>
+			</trans-unit>
+			<trans-unit id="size">
+				<source>Size</source>
+				<target>Größe</target>
+			</trans-unit>
+			<trans-unit id="lettering">
+				<source>Lettering</source>
+				<target>Schriftzug</target>
+			</trans-unit>
+			<trans-unit id="amount">
+				<source>Amount</source>
+				<target>Anzahl</target>
+			</trans-unit>
+			<trans-unit id="priceSingle">
+				<source>Price single</source>
+				<target>Einzelpreis</target>
+			</trans-unit>
+			<trans-unit id="priceTotal">
+				<source>Price total</source>
+				<target>Gesamtpreis</target>
+			</trans-unit>
+			<trans-unit id="sum">
+				<source>Sum</source>
+				<target>Summe</target>
+			</trans-unit>
+			<trans-unit id="noProducts">
+				<source>no products choosen</source>
+				<target>Noch keine Produkte in den Warenkorb gelegt</target>
+			</trans-unit>
+			<trans-unit id="orderWithCosts">
+				<source>Order with Costs</source>
+				<target>Kostenpflichtig bestellen</target>
+			</trans-unit>
+
+			<trans-unit id="memberData">
+				<source>Member data</source>
+				<target>Mitgliederdaten</target>
+			</trans-unit>
+			<trans-unit id="memberId">
+				<source>Member number</source>
+				<target>Mitgliedsnummer</target>
+			</trans-unit>
+			<trans-unit id="memberIdDescription">
+				<source>Enter with 4 digits please</source>
+				<target>Bitte 4-stellig eintragen</target>
+			</trans-unit>
+			<trans-unit id="firstName">
+				<source>Firstname</source>
+				<target>Vorname</target>
+			</trans-unit>
+			<trans-unit id="lastName">
+				<source>Lastname</source>
+				<target>Nachname</target>
+			</trans-unit>
+			<trans-unit id="address">
+				<source>Address</source>
+				<target>Adresse</target>
+			</trans-unit>
+			<trans-unit id="zip">
+				<source>Zip</source>
+				<target>PLZ</target>
+			</trans-unit>
+			<trans-unit id="city">
+				<source>City</source>
+				<target>Wohnort</target>
+			</trans-unit>
+			<trans-unit id="email">
+				<source>Email</source>
+				<target>Email</target>
+			</trans-unit>
+			<trans-unit id="orderDate">
+				<source>Order date</source>
+				<target>Bestelldatum</target>
+			</trans-unit>
+
+			<trans-unit id="productOrder">
+				<source>Product Order</source>
+				<target>Produktbestellung</target>
+			</trans-unit>
+			<trans-unit id="title">
+				<source>Title</source>
+				<target>Titel</target>
+			</trans-unit>
+			<trans-unit id="articleNumber">
+				<source>Art. Nr.</source>
+				<target>Artikelnummer</target>
 			</trans-unit>
 		</body>
 	</file>

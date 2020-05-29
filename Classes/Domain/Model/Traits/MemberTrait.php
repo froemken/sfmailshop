@@ -22,6 +22,7 @@ trait MemberTrait
 {
     /**
      * @var string
+     * @TYPO3\CMS\Extbase\Annotation\Validate("RegularExpression", options={"regularExpression": "/\d{4,4}/"})
      * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
     protected $memberId = '';
@@ -46,6 +47,7 @@ trait MemberTrait
 
     /**
      * @var string
+     * @TYPO3\CMS\Extbase\Annotation\Validate("RegularExpression", options={"regularExpression": "/\d{4,5}/"})
      * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
     protected $zip = '';
@@ -59,6 +61,7 @@ trait MemberTrait
     /**
      * @var string
      * @TYPO3\CMS\Extbase\Annotation\Validate("EmailAddress")
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
     protected $email = '';
 

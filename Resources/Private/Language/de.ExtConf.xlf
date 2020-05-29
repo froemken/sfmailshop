@@ -19,6 +19,10 @@
 				<source>email to name: The recipients email name.</source>
 				<target>E-Mail TO Name: Der Empfänger Name</target>
 			</trans-unit>
+			<trans-unit id="emailSubject" xml:space="preserve">
+				<source>email subject: The subject of the order mail.</source>
+				<target>E-Mail Betreff: Der Betreff der Bestell-Mail</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

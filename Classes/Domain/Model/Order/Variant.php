@@ -39,6 +39,13 @@ class Variant extends AbstractEntity
     protected $selectedSize;
 
     /**
+     * Selected lettering in Cart
+     *
+     * @var string
+     */
+    protected $selectedLettering = '';
+
+    /**
      * @var \StefanFroemken\Sfmailshop\Domain\Model\Variant
      */
     protected $realVariant;
@@ -76,9 +83,25 @@ class Variant extends AbstractEntity
     }
 
     /**
-     * @return \StefanFroemken\Sfmailshop\Domain\Model\Variant
+     * @return string
      */
-    public function getRealVariant(): \StefanFroemken\Sfmailshop\Domain\Model\Variant
+    public function getSelectedLettering(): string
+    {
+        return $this->selectedLettering;
+    }
+
+    /**
+     * @param string $selectedLettering
+     */
+    public function setSelectedLettering(string $selectedLettering): void
+    {
+        $this->selectedLettering = $selectedLettering;
+    }
+
+    /**
+     * @return \StefanFroemken\Sfmailshop\Domain\Model\Variant|null
+     */
+    public function getRealVariant(): ?\StefanFroemken\Sfmailshop\Domain\Model\Variant
     {
         return $this->realVariant;
     }

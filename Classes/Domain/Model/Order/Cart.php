@@ -16,7 +16,6 @@ namespace StefanFroemken\Sfmailshop\Domain\Model\Order;
  */
 
 use StefanFroemken\Sfmailshop\Domain\Model\Traits\MemberTrait;
-use StefanFroemken\Sfmailshop\Domain\Model\Variant;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -82,13 +81,7 @@ class Cart extends AbstractEntity
     {
         $price = 0;
         foreach ($this->products as $orderedProduct) {
-            if ($orderedProduct->getVariants()->count()) {
-                foreach ($orderedProduct->getVariants() as $variant) {
-                    $price += ((int)str_replace(',', '.', $variant->getRealVariant()->getPrice())) * 100;
-                }
-            } else {
-                $price += ((int)str_replace(',', '.', $orderedProduct->getRealProduct()->getPrice())) * 100;
-            }
+            $price += ((int)str_replace(',', '.', $orderedProduct->getPriceTotal())) * 100;
         }
         return $price / 100;
     }

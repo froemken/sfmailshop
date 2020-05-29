@@ -15,8 +15,11 @@ namespace StefanFroemken\Sfmailshop\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use StefanFroemken\Sfmailshop\Configuration\ExtConf;
 use StefanFroemken\Sfmailshop\Domain\Model\Order\Cart;
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
@@ -76,28 +79,31 @@ class ShopController extends ActionController
         /** @var Cart $cart */
         $cart = $this->objectManager->get(Cart::class);
         foreach ($products as $productUid => $variants) {
-            /** @var \StefanFroemken\Sfmailshop\Domain\Model\Order\Product $orderedProduct */
-            $orderedProduct = $this->objectManager->get(
-                \StefanFroemken\Sfmailshop\Domain\Model\Order\Product::class
-            );
-            /** @var \StefanFroemken\Sfmailshop\Domain\Model\Product $realProduct */
-            $realProduct = $this->productRepository->findByIdentifier((int)$productUid);
-            $orderedProduct->setRealProduct($realProduct);
             foreach ($variants as $variantUid => $variantConfiguration) {
+                /** @var \StefanFroemken\Sfmailshop\Domain\Model\Order\Product $orderedProduct */
+                $orderedProduct = $this->objectManager->get(
+                    \StefanFroemken\Sfmailshop\Domain\Model\Order\Product::class
+                );
+                /** @var \StefanFroemken\Sfmailshop\Domain\Model\Product $realProduct */
+                $realProduct = $this->productRepository->findByIdentifier((int)$productUid);
+                $orderedProduct->setRealProduct($realProduct);
+
                 for ($i = 0; $i < $variantConfiguration['amount']; $i++) {
-                    /** @var \StefanFroemken\Sfmailshop\Domain\Model\Order\Variant $orderedVariant */
-                    $orderedVariant = $this->objectManager->get(
-                        \StefanFroemken\Sfmailshop\Domain\Model\Order\Variant::class
-                    );
                     if ($variantUid) {
+                        /** @var \StefanFroemken\Sfmailshop\Domain\Model\Order\Variant $orderedVariant */
+                        $orderedVariant = $this->objectManager->get(
+                            \StefanFroemken\Sfmailshop\Domain\Model\Order\Variant::class
+                        );
                         /** @var \StefanFroemken\Sfmailshop\Domain\Model\Variant $realVariant */
                         $realVariant = $this->variantRepository->findByIdentifier((int)$variantUid);
                         $orderedVariant->setRealVariant($realVariant);
+                        $orderedProduct->addVariant($orderedVariant);
+                    } else {
+                        $orderedProduct->setAmount($orderedProduct->getAmount() + 1);
                     }
-                    $orderedProduct->addVariant($orderedVariant);
                 }
+                $cart->addProduct($orderedProduct);
             }
-            $cart->addProduct($orderedProduct);
         }
 
         $this->view->assign('cart', $cart);
@@ -124,7 +130,21 @@ class ShopController extends ActionController
      */
     public function checkoutAction(Cart $cart)
     {
+        /** @var ExtConf $extConf */
+        $extConf = $this->objectManager->get(ExtConf::class);
         $this->view->assign('cart', $cart);
+        $mail = GeneralUtility::makeInstance(MailMessage::class);
+        $mail->setFrom($extConf->getEmailFromAddress(), $extConf->getEmailFromName());
+        $mail->setTo($extConf->getEmailToAddress(), $extConf->getEmailToName());
+        $mail->setSubject($extConf->getEmailSubject());
+        $mail->setBody($this->view->render(), 'text/html');
+        $mail->send();
+        $this->addFlashMessage('We have received your order', FlashMessage::OK);
+        if (isset($GLOBALS['TSFE'])) {
+            $pageUid = $GLOBALS['TSFE']->id;
+            $this->cacheService->clearPageCache([$pageUid]);
+        }
+        $this->redirect('list', 'Shop');
     }
 
     public function getTypoScriptFrontendController(): TypoScriptFrontendController
