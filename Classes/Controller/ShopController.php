@@ -23,6 +23,7 @@ use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
@@ -112,8 +113,8 @@ class ShopController extends ActionController
     public function clearCartAction()
     {
         $this->addFlashMessage(
-            'Cart was cleared',
-            'Cart cleared',
+            LocalizationUtility::translate('messageCartClearedDescription', 'Sfmailshop'),
+            LocalizationUtility::translate('messageCartCleared', 'Sfmailshop'),
             AbstractMessage::OK
         );
         $this->getTypoScriptFrontendController()->fe_user->setKey(
@@ -139,7 +140,11 @@ class ShopController extends ActionController
         $mail->setSubject($extConf->getEmailSubject());
         $mail->setBody($this->view->render(), 'text/html');
         $mail->send();
-        $this->addFlashMessage('We have received your order', FlashMessage::OK);
+        $this->addFlashMessage(
+            LocalizationUtility::translate('messageOrderReceivedDescription', 'Sfmailshop'),
+            LocalizationUtility::translate('messageOrderReceived', 'Sfmailshop'),
+            FlashMessage::OK
+        );
         if (isset($GLOBALS['TSFE'])) {
             $pageUid = $GLOBALS['TSFE']->id;
             $this->cacheService->clearPageCache([$pageUid]);

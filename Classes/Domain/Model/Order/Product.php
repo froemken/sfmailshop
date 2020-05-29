@@ -17,7 +17,6 @@ namespace StefanFroemken\Sfmailshop\Domain\Model\Order;
 
 use SJBR\StaticInfoTables\Domain\Model\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * This is a special product used for checkout.
@@ -118,7 +117,6 @@ class Product extends AbstractEntity
     public function getTitle(): string
     {
         $title = $this->getRealProduct()->getTitle();
-        DebuggerUtility::var_dump($title, 'P. Title');
         if ($this->getVariants()->count()) {
             $this->getVariants()->rewind();
 
@@ -126,7 +124,6 @@ class Product extends AbstractEntity
             $variant = $this->getVariants()->current();
             if ($variant->getRealVariant()->getTitle()) {
                 $title = $variant->getRealVariant()->getTitle();
-                DebuggerUtility::var_dump($title, 'V. Title');
             }
         }
 

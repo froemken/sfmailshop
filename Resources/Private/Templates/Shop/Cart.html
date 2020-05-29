@@ -43,6 +43,8 @@
                 <f:then>
                     <f:variable name="amountOfVariants">{product.variants -> f:count()}</f:variable>
                     <f:for each="{product.variants}" as="variant" iteration="variantIterator">
+                        <f:form.hidden property="products.{productIterator.index}.variants.{variantIterator.index}.realVariant.title"
+                                       value="{variant.realVariant.title}" />
                         <tr>
                             <f:if condition="{variantIterator.isFirst}">
                                 <td rowspan="{amountOfVariants + 2}">

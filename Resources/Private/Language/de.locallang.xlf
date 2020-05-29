@@ -56,6 +56,23 @@
 				<target>Kostenpflichtig bestellen</target>
 			</trans-unit>
 
+			<trans-unit id="messageOrderReceived">
+				<source>Order received</source>
+				<target>Bestellung erhalten</target>
+			</trans-unit>
+			<trans-unit id="messageOrderReceivedDescription">
+				<source>Thank you for your order</source>
+				<target>Vielen Dank für Ihre Bestellung</target>
+			</trans-unit>
+			<trans-unit id="messageCartCleared">
+				<source>Cart cleared</source>
+				<target>Warenkorb geleert</target>
+			</trans-unit>
+			<trans-unit id="messageCartClearedDescription">
+				<source>The cart was cleared, you can now start a new order.</source>
+				<target>Der Warenkorb wurde geleert, Du kannst jetzt eine neue Bestellung aufgeben.</target>
+			</trans-unit>
+
 			<trans-unit id="memberData">
 				<source>Member data</source>
 				<target>Mitgliederdaten</target>

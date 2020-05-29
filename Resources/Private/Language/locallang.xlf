@@ -43,6 +43,19 @@
 				<source>Order with Costs</source>
 			</trans-unit>
 
+			<trans-unit id="messageOrderReceived">
+				<source>Order received</source>
+			</trans-unit>
+			<trans-unit id="messageOrderReceivedDescription">
+				<source>Thank you for your order</source>
+			</trans-unit>
+			<trans-unit id="messageCartCleared">
+				<source>Cart cleared</source>
+			</trans-unit>
+			<trans-unit id="messageCartClearedDescription">
+				<source>The cart was cleared, you can now start a new order.</source>
+			</trans-unit>
+
 			<trans-unit id="memberData">
 				<source>Member data</source>
 			</trans-unit>

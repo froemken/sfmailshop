@@ -49,10 +49,10 @@ class ExtConf implements SingletonInterface
     public function __construct()
     {
         // On a fresh installation this value can be null.
-        if (isset($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['events2'])) {
+        if (isset($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sfmailshop'])) {
             // get global configuration
             $extConf = unserialize(
-                $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['events2'],
+                $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sfmailshop'],
                 ['allowed_classes' => false]
             );
             if (is_array($extConf) && count($extConf)) {
