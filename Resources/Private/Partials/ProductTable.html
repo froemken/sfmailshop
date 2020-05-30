@@ -1,0 +1,186 @@
+<table>
+    <f:for each="{cart.products}" as="product" iteration="productIterator">
+        <thead>
+        <tr>
+            <th><f:translate key="title" /></th>
+            <th><f:translate key="color" /></th>
+            <th><f:translate key="size" /></th>
+            <th><f:translate key="lettering" /></th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        <f:form.hidden property="products.{productIterator.index}.realProduct.title"
+                       value="{product.realProduct.title}" />
+        <f:form.hidden property="products.{productIterator.index}.amount"
+                       value="{product.amount}" />
+        <f:if condition="{product.variants}">
+            <f:then>
+                <f:variable name="amountOfVariants">{product.variants -> f:count()}</f:variable>
+                <f:for each="{product.variants}" as="variant" iteration="variantIterator">
+                    <f:form.hidden property="products.{productIterator.index}.variants.{variantIterator.index}.realVariant.title"
+                                   value="{variant.realVariant.title}" />
+                    <tr>
+                        <f:if condition="{variantIterator.isFirst}">
+                            <td rowspan="{amountOfVariants + 2}">
+                                <f:render section="renderTitleColumn" arguments="{_all}" />
+                            </td>
+                        </f:if>
+                        <td>
+                            <f:if condition="{variant.realVariant.color -> f:count()}">
+                                <f:render section="renderTextOrSelect"
+                                          arguments="{options: variant.realVariant.color, variant: variant.realVariant, product: product.realProduct, productIterator: productIterator, variantIterator: variantIterator, label: 'Farbe', name: 'selectedColor'}" />
+                            </f:if>
+                        </td>
+                        <td>
+                            <f:if condition="{variant.realVariant.sizes -> f:count()}">
+                                <f:render section="renderTextOrSelect"
+                                          arguments="{options: variant.realVariant.sizes, variant: variant.realVariant, product: product.realProduct, productIterator: productIterator, variantIterator: variantIterator, label: 'Größe', name: 'selectedSize'}" />
+                            </f:if>
+                        </td>
+                        <td>
+                            <f:if condition="{variant.realVariant.hasLettering}">
+                                <f:form.textfield property="products.{productIterator.index}.variants.{variantIterator.index}.selectedLettering" />
+                            </f:if>
+                        </td>
+                        <td>
+                            <f:render section="renderRemoveLink" arguments="{_all}" />
+                        </td>
+                    </tr>
+                </f:for>
+            </f:then>
+            <f:else>
+                <tr>
+                    <td rowspan="3">
+                        <f:render section="renderTitleColumn" arguments="{_all}" />
+                    </td>
+                    <td colspan="4">&nbsp;</td>
+                </tr>
+            </f:else>
+        </f:if>
+        <tr>
+            <td>&nbsp;</td>
+            <td><f:translate key="amount" /></td>
+            <td><f:translate key="priceSingle" /></td>
+            <td><f:translate key="priceTotal" /></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>{product.amount}</td>
+            <td><f:render partial="General" section="renderPrice" arguments="{price: product.price}" /></td>
+            <td><f:render partial="General" section="renderPrice" arguments="{price: product.priceTotal}" /></td>
+        </tr>
+        </tbody>
+    </f:for>
+    <tr>
+        <td colspan="3">&nbsp;</td>
+        <td><strong><f:translate key="sum" />:</strong></td>
+        <td>
+            <strong>
+                <f:render partial="General" section="renderPrice" arguments="{price: cart.priceTotal}" />
+            </strong>
+        </td>
+    </tr>
+</table>
+
+<f:section name="renderTitleColumn">
+    <p>{product.title}</p>
+    <p>
+        <f:if condition="{product.variants}">
+            <f:then>
+                <f:link.action action="cart"
+                               class="addSubToCart"
+                               data="{host: host, product-uid: product.realProduct.uid, variant-uid: variant.realVariant.uid, method: 'addToCart', reload: 1}">
+                    <f:translate key="addToCart" />
+                </f:link.action>
+            </f:then>
+            <f:else>
+                <f:link.action action="cart"
+                               class="addSubToCart"
+                               data="{host: host, product-uid: product.realProduct.uid, method: 'addToCart', reload: 1}">
+                    <f:translate key="addToCart" />
+                </f:link.action><br>
+                <f:render section="renderRemoveLink" arguments="{_all}" />
+            </f:else>
+        </f:if>
+    </p>
+</f:section>
+
+<f:section name="renderRemoveLink">
+    <f:if condition="{product.variants}">
+        <f:then>
+            <f:link.action action="cart"
+                           class="addSubToCart"
+                           data="{host: host, product-uid: product.realProduct.uid, variant-uid: variant.realVariant.uid, method: 'removeFromCart', reload: 1}">
+                <f:translate key="removeFromCart" />
+            </f:link.action>
+        </f:then>
+        <f:else>
+            <f:link.action action="cart"
+                           class="addSubToCart"
+                           data="{host: host, product-uid: product.realProduct.uid, method: 'removeFromCart', reload: 1}">
+                <f:translate key="removeFromCart" />
+            </f:link.action>
+        </f:else>
+    </f:if>
+</f:section>
+
+<f:section name="renderVariantFormFields">
+    <table>
+        <thead>
+        <tr>
+            <th><f:translate key="color" /></th>
+            <th><f:translate key="size" /></th>
+            <th><f:translate key="lettering" /></th>
+        </tr>
+        </thead>
+        <tbody>
+        <f:for each="{product.variants}" as="variant" iteration="variantIterator">
+            <tr>
+                <td>
+                    <f:if condition="{variant.realVariant.color -> f:count()}">
+                        <f:render section="renderTextOrSelect"
+                                  arguments="{options: variant.realVariant.color, variant: variant.realVariant, product: product.realProduct, productIterator: productIterator, variantIterator: variantIterator, label: 'Farbe', name: 'selectedColor'}" />
+                    </f:if>
+                </td>
+                <td>
+                    <f:if condition="{variant.realVariant.sizes -> f:count()}">
+                        <f:render section="renderTextOrSelect"
+                                  arguments="{options: variant.realVariant.sizes, variant: variant.realVariant, product: product.realProduct, productIterator: productIterator, variantIterator: variantIterator, label: 'Größe', name: 'selectedSize'}" />
+                    </f:if>
+                </td>
+                <td>
+                    <f:if condition="{variant.realVariant.hasLettering}">
+                        <f:form.textfield property="products.{productIterator.index}.variants.{variantIterator.index}.selectedLettering" />
+                    </f:if>
+                </td>
+            </tr>
+        </f:for>
+        </tbody>
+    </table>
+</f:section>
+
+<f:section name="renderTextOrSelect">
+    <f:if condition="{options -> f:count()} == 1">
+        <f:then>
+            <f:for each="{options}" as="option" iteration="iterator">
+                <f:if condition="iterator.isFirst">
+                    <f:form.hidden property="products.{productIterator.index}.variants.{variantIterator.index}.{name}"
+                                   value="{option.uid}" />
+                    {option.title}
+                </f:if>
+            </f:for>
+        </f:then>
+        <f:else>
+            <div class="form-group">
+                <div class="select">
+                    <f:form.select property="products.{productIterator.index}.variants.{variantIterator.index}.{name}"
+                                   class="form-control"
+                                   optionLabelField="title"
+                                   optionValueField="uid"
+                                   options="{options}" />
+                </div>
+            </div>
+        </f:else>
+    </f:if>
+</f:section>

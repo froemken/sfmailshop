@@ -1,7 +1,7 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
-<f:layout name="Default" />
+<f:layout name="OrderMail" />
 
 <f:section name="main">
     <h2><f:translate key="memberData" /></h2>
@@ -46,55 +46,60 @@
     <h2><f:translate key="productOrder" /></h2>
 
     <table>
-        <thead>
-        <tr>
-            <th><f:translate key="title" /></th>
-            <th><f:translate key="articleNumber" /></th>
-            <th colspan="2">Variante</th>
-        </tr>
-        </thead>
-        <tbody>
         <f:for each="{cart.products}" as="product" iteration="productIterator">
+            <thead>
             <tr>
-                <td>{product.realProduct.title}</td>
-                <td>{product.realProduct.articleNumber}</td>
-                <td colspan="2">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Farbe</th>
-                            <th>Größe</th>
-                            <th>Schriftzug</th>
-                            <th>Preis</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <f:for each="{product.variants}" as="variant" iteration="variantIterator">
-                            <tr>
-                                <td>{variant.realVariant.title}</td>
-                                <td>{variant.selectedColor.title}</td>
-                                <td>{variant.selectedSize.title}</td>
-                                <td>{variant.selectedLettering}</td>
-                                <td>
-                                    <f:render partial="General" section="renderPrice" arguments="{price: variant.realVariant.price}" />
-                                </td>
-                            </tr>
-                        </f:for>
-                        </tbody>
-                    </table>
-                </td>
+                <th><f:translate key="title" /></th>
+                <th><f:translate key="color" /></th>
+                <th><f:translate key="size" /></th>
+                <th><f:translate key="lettering" /></th>
             </tr>
+            </thead>
+            <tbody>
+            <f:if condition="{product.variants}">
+                <f:then>
+                    <f:variable name="amountOfVariants">{product.variants -> f:count()}</f:variable>
+                    <f:for each="{product.variants}" as="variant" iteration="variantIterator">
+                        <tr>
+                            <f:if condition="{variantIterator.isFirst}">
+                                <td rowspan="{amountOfVariants + 2}">
+                                    {product.title}
+                                </td>
+                            </f:if>
+                            <td>{variant.selectedColor.title}</td>
+                            <td>{variant.selectedSize.title}</td>
+                            <td>{variant.selectedLettering}</td>
+                        </tr>
+                    </f:for>
+                </f:then>
+                <f:else>
+                    <tr>
+                        <td rowspan="3">
+                            {product.title}
+                        </td>
+                    </tr>
+                </f:else>
+            </f:if>
+            <tr>
+                <th><f:translate key="amount" /></th>
+                <th><f:translate key="priceSingle" /></th>
+                <th><f:translate key="priceTotal" /></th>
+            </tr>
+            <tr>
+                <td>{product.amount}</td>
+                <td><f:render partial="General" section="renderPrice" arguments="{price: product.price}" /></td>
+                <td><f:render partial="General" section="renderPrice" arguments="{price: product.priceTotal}" /></td>
+            </tr>
+            </tbody>
         </f:for>
         <tr>
             <td colspan="2">&nbsp;</td>
-            <td><strong>Summe:</strong></td>
+            <td><strong><f:translate key="sum" />:</strong></td>
             <td>
                 <strong>
                     <f:render partial="General" section="renderPrice" arguments="{price: cart.priceTotal}" />
                 </strong>
             </td>
         </tr>
-        </tbody>
     </table>
 </f:section>
