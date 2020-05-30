@@ -6,7 +6,6 @@
             <th><f:translate key="color" /></th>
             <th><f:translate key="size" /></th>
             <th><f:translate key="lettering" /></th>
-            <th>&nbsp;</th>
         </tr>
         </thead>
         <tbody>
@@ -43,9 +42,6 @@
                                 <f:form.textfield property="products.{productIterator.index}.variants.{variantIterator.index}.selectedLettering" />
                             </f:if>
                         </td>
-                        <td>
-                            <f:render section="renderRemoveLink" arguments="{_all}" />
-                        </td>
                     </tr>
                 </f:for>
             </f:then>
@@ -54,18 +50,16 @@
                     <td rowspan="3">
                         <f:render section="renderTitleColumn" arguments="{_all}" />
                     </td>
-                    <td colspan="4">&nbsp;</td>
+                    <td colspan="3">&nbsp;</td>
                 </tr>
             </f:else>
         </f:if>
         <tr>
-            <td>&nbsp;</td>
             <td><f:translate key="amount" /></td>
             <td><f:translate key="priceSingle" /></td>
             <td><f:translate key="priceTotal" /></td>
         </tr>
         <tr>
-            <td>&nbsp;</td>
             <td>{product.amount}</td>
             <td><f:render partial="General" section="renderPrice" arguments="{price: product.price}" /></td>
             <td><f:render partial="General" section="renderPrice" arguments="{price: product.priceTotal}" /></td>
@@ -73,7 +67,7 @@
         </tbody>
     </f:for>
     <tr>
-        <td colspan="3">&nbsp;</td>
+        <td colspan="2">&nbsp;</td>
         <td><strong><f:translate key="sum" />:</strong></td>
         <td>
             <strong>
@@ -91,8 +85,9 @@
                 <f:link.action action="cart"
                                class="addSubToCart"
                                data="{host: host, product-uid: product.realProduct.uid, variant-uid: variant.realVariant.uid, method: 'addToCart', reload: 1}">
-                    <f:translate key="addToCart" />
+                    <f:translate key="addToCart" /><br>
                 </f:link.action>
+                <f:render section="renderRemoveLink" arguments="{_all}" />
             </f:then>
             <f:else>
                 <f:link.action action="cart"
@@ -111,7 +106,7 @@
         <f:then>
             <f:link.action action="cart"
                            class="addSubToCart"
-                           data="{host: host, product-uid: product.realProduct.uid, variant-uid: variant.realVariant.uid, method: 'removeFromCart', reload: 1}">
+                           data="{host: host, product-uid: product.realProduct.uid, variant-uid: variant.realVariant.uid, position: variantIterator.index, method: 'removeFromCart', reload: 1}">
                 <f:translate key="removeFromCart" />
             </f:link.action>
         </f:then>

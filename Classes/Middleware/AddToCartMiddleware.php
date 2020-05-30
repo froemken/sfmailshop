@@ -45,6 +45,7 @@ class AddToCartMiddleware implements MiddlewareInterface
 
         $productUid = (int)$pluginRequest['productUid'];
         $variantUid = (int)$pluginRequest['variantUid'];
+        $position = (int)$pluginRequest['position'];
         $products = json_decode($this
             ->getTypoScriptFrontendController()
             ->fe_user
@@ -57,20 +58,24 @@ class AddToCartMiddleware implements MiddlewareInterface
             ]);
         }
 
-        if (!isset($products[$productUid][$variantUid]['amount'])) {
-            $products[$productUid][$variantUid]['amount'] = 0;
+        if (!isset($products[$productUid][$variantUid])) {
+            $products[$productUid][$variantUid] = [];
         }
 
         switch ($pluginRequest['method']) {
             case 'addToCart':
-                $products[$productUid][$variantUid]['amount'] += 1;
+                $products[$productUid][$variantUid][] = true;
                 break;
             case 'removeFromCart':
-                if ($products[$productUid][$variantUid]['amount'] > 0) {
-                    $products[$productUid][$variantUid]['amount'] -= 1;
+                if (isset($products[$productUid][$variantUid][$position])) {
+                    unset($products[$productUid][$variantUid][$position]);
+                    $products[$productUid][$variantUid] = array_values($products[$productUid][$variantUid]);
                 }
-                if (empty($products[$productUid][$variantUid]['amount'])) {
+                if (empty($products[$productUid][$variantUid])) {
                     unset($products[$productUid][$variantUid]);
+                }
+                if (empty($products[$productUid])) {
+                    unset($products[$productUid]);
                 }
                 break;
             default:

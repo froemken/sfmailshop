@@ -80,7 +80,7 @@ class ShopController extends ActionController
         /** @var Cart $cart */
         $cart = $this->objectManager->get(Cart::class);
         foreach ($products as $productUid => $variants) {
-            foreach ($variants as $variantUid => $variantConfiguration) {
+            foreach ($variants as $variantUid => $entries) {
                 /** @var \StefanFroemken\Sfmailshop\Domain\Model\Order\Product $orderedProduct */
                 $orderedProduct = $this->objectManager->get(
                     \StefanFroemken\Sfmailshop\Domain\Model\Order\Product::class
@@ -89,7 +89,7 @@ class ShopController extends ActionController
                 $realProduct = $this->productRepository->findByIdentifier((int)$productUid);
                 $orderedProduct->setRealProduct($realProduct);
 
-                for ($i = 0; $i < $variantConfiguration['amount']; $i++) {
+                foreach ($entries as $position => $entry) {
                     if ($variantUid) {
                         /** @var \StefanFroemken\Sfmailshop\Domain\Model\Order\Variant $orderedVariant */
                         $orderedVariant = $this->objectManager->get(
@@ -108,22 +108,6 @@ class ShopController extends ActionController
         }
 
         $this->view->assign('cart', $cart);
-    }
-
-    public function clearCartAction()
-    {
-        $this->addFlashMessage(
-            LocalizationUtility::translate('messageCartClearedDescription', 'Sfmailshop'),
-            LocalizationUtility::translate('messageCartCleared', 'Sfmailshop'),
-            AbstractMessage::OK
-        );
-        $this->getTypoScriptFrontendController()->fe_user->setKey(
-            'ses',
-            'sfmailshop-products',
-            json_encode([])
-        );
-        $this->getTypoScriptFrontendController()->fe_user->storeSessionData();
-        $this->redirect('cart', 'Shop');
     }
 
     /**
@@ -150,6 +134,22 @@ class ShopController extends ActionController
             $this->cacheService->clearPageCache([$pageUid]);
         }
         $this->redirect('list', 'Shop');
+    }
+
+    public function clearCartAction()
+    {
+        $this->addFlashMessage(
+            LocalizationUtility::translate('messageCartClearedDescription', 'Sfmailshop'),
+            LocalizationUtility::translate('messageCartCleared', 'Sfmailshop'),
+            AbstractMessage::OK
+        );
+        $this->getTypoScriptFrontendController()->fe_user->setKey(
+            'ses',
+            'sfmailshop-products',
+            json_encode([])
+        );
+        $this->getTypoScriptFrontendController()->fe_user->storeSessionData();
+        $this->redirect('cart', 'Shop');
     }
 
     public function getTypoScriptFrontendController(): TypoScriptFrontendController

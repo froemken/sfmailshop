@@ -50,6 +50,7 @@
             <thead>
             <tr>
                 <th><f:translate key="title" /></th>
+                <th><f:translate key="articleNumber" /></th>
                 <th><f:translate key="color" /></th>
                 <th><f:translate key="size" /></th>
                 <th><f:translate key="lettering" /></th>
@@ -65,6 +66,9 @@
                                 <td rowspan="{amountOfVariants + 2}">
                                     {product.title}
                                 </td>
+                                <td rowspan="{amountOfVariants + 2}">
+                                    {product.realProduct.articleNumber}
+                                </td>
                             </f:if>
                             <td>{variant.selectedColor.title}</td>
                             <td>{variant.selectedSize.title}</td>
@@ -77,6 +81,10 @@
                         <td rowspan="3">
                             {product.title}
                         </td>
+                        <td rowspan="3">
+                            {product.realProduct.articleNumber}
+                        </td>
+                        <td colspan="3">&nbsp;</td>
                     </tr>
                 </f:else>
             </f:if>
