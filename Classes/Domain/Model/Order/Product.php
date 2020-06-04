@@ -55,6 +55,7 @@ class Product extends AbstractEntity
         if ($this->getVariants()->count()) {
             $amount = $this->getVariants()->count();
         }
+
         return $amount;
     }
 
@@ -130,7 +131,17 @@ class Product extends AbstractEntity
         return $title;
     }
 
-    public function getPrice(): string
+    /**
+     * Get price of product or, if exists, the price of the first found variant.
+     * As all variants here are the same for the product, it's no problem, to check only the
+     * first variant.
+     *
+     * This method will return the original price as it exists in DB.
+     * No formatting will be applied here. So it can be 12 or 12,45 or 12.45
+     *
+     * @return float
+     */
+    public function getPrice(): float
     {
         $price = $this->getRealProduct()->getPrice();
         if ($this->getVariants()->count()) {
@@ -142,21 +153,13 @@ class Product extends AbstractEntity
                 $price = $variant->getRealVariant()->getPrice();
             }
         }
+
         return $price;
     }
 
     public function getPriceTotal(): float
     {
-        $priceTotal = 0;
-        if ($this->getVariants()->count()) {
-            foreach ($this->getVariants() as $variant) {
-                $price = (int)str_replace(',', '.', $variant->getRealVariant()->getPrice());
-                $priceTotal += ($price * 100);
-            }
-        } else {
-            $price = (int)str_replace(',', '.', $this->getRealProduct()->getPrice());
-            $priceTotal += ($price * $this->getAmount() * 100);
-        }
-        return $priceTotal / 100;
+        $priceAsInteger = (int)($this->getPrice() * 100);
+        return (float)($priceAsInteger * $this->getAmount()) / 100;
     }
 }

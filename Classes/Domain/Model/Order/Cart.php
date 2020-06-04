@@ -81,7 +81,7 @@ class Cart extends AbstractEntity
     {
         $price = 0;
         foreach ($this->products as $orderedProduct) {
-            $price += ((int)str_replace(',', '.', $orderedProduct->getPriceTotal())) * 100;
+            $price += (int)($orderedProduct->getPriceTotal() * 100);
         }
         return $price / 100;
     }

@@ -53,11 +53,6 @@ class Product extends AbstractEntity
     protected $stock = 0;
 
     /**
-     * @var int
-     */
-    protected $amount = 0;
-
-    /**
      * These are the variants from Database
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\StefanFroemken\Sfmailshop\Domain\Model\Variant>
@@ -124,11 +119,11 @@ class Product extends AbstractEntity
     }
 
     /**
-     * @return string
+     * @return float
      */
-    public function getPrice(): string
+    public function getPrice(): float
     {
-        return $this->price;
+        return (float)str_replace(',', '.', $this->price);
     }
 
     /**
@@ -153,22 +148,6 @@ class Product extends AbstractEntity
     public function setStock(int $stock): void
     {
         $this->stock = $stock;
-    }
-
-    /**
-     * @return int
-     */
-    public function getAmount(): int
-    {
-        return $this->amount;
-    }
-
-    /**
-     * @param int $amount
-     */
-    public function setAmount(int $amount): void
-    {
-        $this->amount = $amount;
     }
 
     /**

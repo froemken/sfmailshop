@@ -40,9 +40,9 @@ class Variant extends AbstractEntity
     protected $price = '';
 
     /**
-     * @var string
+     * @var int
      */
-    protected $stock = '';
+    protected $stock = 0;
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\StefanFroemken\Sfmailshop\Domain\Model\Color>
@@ -84,7 +84,7 @@ class Variant extends AbstractEntity
      */
     public function getTitle(): string
     {
-        if (empty($this->title)) {
+        if (empty($this->title) && $this->product instanceof Product) {
             return $this->product->getTitle();
         }
         return $this->title;
@@ -99,14 +99,14 @@ class Variant extends AbstractEntity
     }
 
     /**
-     * @return string
+     * @return float
      */
-    public function getPrice(): string
+    public function getPrice(): float
     {
-        if (empty($this->price)) {
+        if (empty($this->price) && $this->product instanceof Product) {
             return $this->product->getPrice();
         }
-        return $this->price;
+        return (float)str_replace(',', '.', $this->price);
     }
 
     /**
@@ -118,17 +118,17 @@ class Variant extends AbstractEntity
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getStock(): string
+    public function getStock(): int
     {
         return $this->stock;
     }
 
     /**
-     * @param string $stock
+     * @param int $stock
      */
-    public function setStock(string $stock): void
+    public function setStock(int $stock): void
     {
         $this->stock = $stock;
     }
