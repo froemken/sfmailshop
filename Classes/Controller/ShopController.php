@@ -120,7 +120,9 @@ class ShopController extends ActionController
         $this->view->assign('cart', $cart);
         $mail = GeneralUtility::makeInstance(MailMessage::class);
         $mail->setFrom($extConf->getEmailFromAddress(), $extConf->getEmailFromName());
-        $mail->setTo($extConf->getEmailToAddress(), $extConf->getEmailToName());
+        foreach (GeneralUtility::trimExplode(',', $extConf->getEmailToAddress(), true) as $emailToAddress) {
+            $mail->addTo($emailToAddress, $extConf->getEmailToName());
+        }
         $mail->setSubject($extConf->getEmailSubject());
         $mail->setBody($this->view->render(), 'text/html');
         $mail->send();
