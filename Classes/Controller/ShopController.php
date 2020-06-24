@@ -135,6 +135,13 @@ class ShopController extends ActionController
             $pageUid = $GLOBALS['TSFE']->id;
             $this->cacheService->clearPageCache([$pageUid]);
         }
+        $this->getTypoScriptFrontendController()->fe_user->setKey(
+            'ses',
+            'sfmailshop-products',
+            json_encode([])
+        );
+        $this->getTypoScriptFrontendController()->fe_user->storeSessionData();
+
         $this->redirect('list', 'Shop');
     }
 
