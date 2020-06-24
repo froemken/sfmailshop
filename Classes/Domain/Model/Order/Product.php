@@ -118,11 +118,13 @@ class Product extends AbstractEntity
     public function getTitle(): string
     {
         $title = $this->getRealProduct()->getTitle();
-        if ($this->getVariants()->count()) {
-            $this->getVariants()->rewind();
+        // This clone is a must have. Without it, it will come to side effects within f:for
+        $variants = clone $this->getVariants();
+        if ($variants->count()) {
+            $variants->rewind();
 
             /** @var Variant $variant */
-            $variant = $this->getVariants()->current();
+            $variant = $variants->current();
             if ($variant->getRealVariant()->getTitle()) {
                 $title = $variant->getRealVariant()->getTitle();
             }
@@ -144,11 +146,13 @@ class Product extends AbstractEntity
     public function getPrice(): float
     {
         $price = $this->getRealProduct()->getPrice();
-        if ($this->getVariants()->count()) {
-            $this->getVariants()->rewind();
+        // This clone is a must have. Without it, it will come to side effects within f:for
+        $variants = clone $this->getVariants();
+        if ($variants->count()) {
+            $variants->rewind();
 
             /** @var Variant $variant */
-            $variant = $this->getVariants()->current();
+            $variant = $variants->current();
             if ($variant->getRealVariant()->getPrice()) {
                 $price = $variant->getRealVariant()->getPrice();
             }
