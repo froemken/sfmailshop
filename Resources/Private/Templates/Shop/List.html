@@ -60,7 +60,7 @@
                         </f:then>
                         <f:else>
                             <f:for each="{product.variants}" as="variant">
-                                <div class="grid">
+                                <div class="grid margin-top">
                                     <div class="col-7">{variant.title}</div>
                                     <div class="col-2"><f:render partial="General" section="renderPrice" arguments="{price: variant.price}" /></div>
                                     <div class="col-3">
