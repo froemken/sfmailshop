@@ -154,7 +154,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required',
+                'eval' => 'required',
             ],
         ],
         'is_top_product' => [
