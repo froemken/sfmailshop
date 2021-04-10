@@ -47,6 +47,14 @@
 				<source>Sum</source>
 				<target>Summe</target>
 			</trans-unit>
+			<trans-unit id="shipping">
+				<source>Shipping</source>
+				<target>Versand</target>
+			</trans-unit>
+			<trans-unit id="total">
+				<source>Total</source>
+				<target>Gesamt</target>
+			</trans-unit>
 			<trans-unit id="noProducts">
 				<source>no products choosen</source>
 				<target>Noch keine Produkte in den Warenkorb gelegt</target>
@@ -56,6 +64,14 @@
 				<target>Kostenpflichtig bestellen</target>
 			</trans-unit>
 
+			<trans-unit id="message.selection.title">
+				<source>Info</source>
+				<target>Info</target>
+			</trans-unit>
+			<trans-unit id="message.selection.description">
+				<source>Please choose color, size and, if given, lettering.</source>
+				<target>Bitte Farbe, Größe und ggf. Schriftzug angeben.</target>
+			</trans-unit>
 			<trans-unit id="messageOrderReceived">
 				<source>Order received</source>
 				<target>Bestellung erhalten</target>

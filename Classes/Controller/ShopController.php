@@ -63,6 +63,11 @@ class ShopController extends ActionController
 
     public function cartAction()
     {
+        $this->addFlashMessage(
+            LocalizationUtility::translate('message.selection.description', 'sfmailshop'),
+            LocalizationUtility::translate('message.selection.title', 'sfmailshop'),
+            AbstractMessage::INFO
+        );
         $products = json_decode($this
             ->getTypoScriptFrontendController()
             ->fe_user

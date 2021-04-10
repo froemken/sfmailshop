@@ -36,6 +36,12 @@
 			<trans-unit id="sum">
 				<source>Sum</source>
 			</trans-unit>
+			<trans-unit id="shipping">
+				<source>Shipping</source>
+			</trans-unit>
+			<trans-unit id="total">
+				<source>Total</source>
+			</trans-unit>
 			<trans-unit id="noProducts">
 				<source>no products choosen</source>
 			</trans-unit>
@@ -43,6 +49,12 @@
 				<source>Order with Costs</source>
 			</trans-unit>
 
+			<trans-unit id="message.selection.title">
+				<source>Info</source>
+			</trans-unit>
+			<trans-unit id="message.selection.description">
+				<source>Please choose color, size and, if given, lettering.</source>
+			</trans-unit>
 			<trans-unit id="messageOrderReceived">
 				<source>Order received</source>
 			</trans-unit>
