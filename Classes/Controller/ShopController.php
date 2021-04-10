@@ -61,6 +61,20 @@ class ShopController extends ActionController
         $this->view->assign('products', $this->productRepository->findAll());
     }
 
+    /**
+     * @param string $search
+     */
+    public function searchAction(string $search)
+    {
+        $this->view->assign(
+            'products',
+            $this->productRepository->findBySearch(
+                strip_tags(htmlspecialchars($search))
+            )
+        );
+        $this->view->assign('search', $search);
+    }
+
     public function cartAction()
     {
         $this->addFlashMessage(

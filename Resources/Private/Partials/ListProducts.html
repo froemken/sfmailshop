@@ -1,0 +1,148 @@
+<f:for each="{products}" as="product">
+    <div class="grid frame frame-ruler-after">
+        <div class="col-3">
+            <f:for each="{product.images}" as="image" iteration="iterator">
+                <f:image image="{image}" width="327" />
+                <br>
+            </f:for>
+        </div>
+        <div class="col-9">
+            <f:if condition="{product.variants -> f:count()} == 0">
+                <f:then>
+                    <f:render section="noVariant" arguments="{product: product}" />
+                </f:then>
+                <f:else if="{product.variants -> f:count()} == 1">
+                    <f:render section="oneVariant" arguments="{product: product}" />
+                </f:else>
+                <f:else>
+                    <f:render section="allVariants" arguments="{product: product}" />
+                </f:else>
+            </f:if>
+            <f:if condition="{product.variants -> f:count()} == 0">
+                <f:then>
+                    <div class="grid margin-top frame-layout-100">
+                        <div class="col-12 text-right">
+                            <button class="btn btn-primary addSubToCart"
+                                    data-host="{host}"
+                                    data-page-id="{pageId}"
+                                    data-method="addToCart"
+                                    data-product-uid="{product.uid}"
+                                    data-product-title="{product.title}">
+                                {f:translate(key: 'addToCart')}
+                            </button>
+                        </div>
+                    </div>
+                </f:then>
+                <f:else>
+                    <f:for each="{product.variants}" as="variant">
+                        <div class="grid margin-top frame-layout-100">
+                            <div class="col-7">{variant.title}</div>
+                            <div class="col-2"><f:render partial="General" section="renderPrice" arguments="{price: variant.price}" /></div>
+                            <div class="col-3 text-right">
+                                <button class="btn btn-primary addSubToCart"
+                                        data-host="{host}"
+                                        data-page-id="{pageId}"
+                                        data-method="addToCart"
+                                        data-product-uid="{product.uid}"
+                                        data-variant-uid="{variant.uid}"
+                                        data-product-title="{product.title}">
+                                    {f:translate(key: 'addToCart')}
+                                </button>
+                            </div>
+                        </div>
+                    </f:for>
+                </f:else>
+            </f:if>
+        </div>
+        <div class="col-12 text-right form-group">
+        </div>
+    </div>
+</f:for>
+
+<f:section name="noVariant">
+    <header>
+        <h2>{product.title}</h2>
+    </header>
+    <p class="ce-textpic ce-left ce-intext">
+        {product.description}
+    </p>
+    <ul>
+        <li>Artikelnummer: {product.articleNumber}</li>
+        <li>
+            <strong>Preis:</strong>
+            <f:render partial="General" section="renderPrice" arguments="{price: product.price}" />
+        </li>
+    </ul>
+</f:section>
+
+<f:section name="oneVariant">
+    <f:for each="{product.variants}" as="variant" iteration="iterator">
+        <f:if condition="{iterator.isFirst}">
+            <header>
+                <h2>{f:if(condition: variant.title, then: variant.title, else: product.title)}</h2>
+            </header>
+            <p class="ce-textpic ce-left ce-intext">
+                {product.description}
+            </p>
+            <ul>
+                <li>Artikelnummer: {product.articleNumber}</li>
+                <f:if condition="{variant.color}">
+                    <li><strong>Farbe:</strong>
+                        <f:for each="{variant.color}" as="color" iteration="iterator">
+                            <f:if condition="{iterator.isFirst}">
+                                <f:then>{color.title}</f:then>
+                                <f:else>, {color.title}</f:else>
+                            </f:if>
+                        </f:for>
+                    </li>
+                </f:if>
+                <f:if condition="{variant.sizes}">
+                    <li>
+                        <strong>Größe:</strong>
+                        <f:for each="{variant.sizes}" as="size" iteration="iterator">
+                            <f:if condition="{iterator.isFirst}">
+                                <f:then>{size.title}</f:then>
+                                <f:else>, {size.title}</f:else>
+                            </f:if>
+                        </f:for>
+                    </li>
+                </f:if>
+            </ul>
+        </f:if>
+    </f:for>
+</f:section>
+
+<f:section name="allVariants">
+    <f:for each="{product.variants}" as="variant" iteration="iterator">
+        <header>
+            <h2>{variant.title}</h2>
+        </header>
+        <ul>
+            <li>Artikelnummer: {product.articleNumber}</li>
+            <f:if condition="{variant.color}">
+                <li><strong>Farbe:</strong>
+                    <f:for each="{variant.color}" as="color" iteration="iterator">
+                        <f:if condition="{iterator.isFirst}">
+                            <f:then>{color.title}</f:then>
+                            <f:else>, {color.title}</f:else>
+                        </f:if>
+                    </f:for>
+                </li>
+            </f:if>
+            <f:if condition="{variant.sizes}">
+                <li>
+                    <strong>Größe:</strong>
+                    <f:for each="{variant.sizes}" as="size" iteration="iterator">
+                        <f:if condition="{iterator.isFirst}">
+                            <f:then>{size.title}</f:then>
+                            <f:else>, {size.title}</f:else>
+                        </f:if>
+                    </f:for>
+                </li>
+            </f:if>
+        </ul>
+    </f:for>
+    <p>
+        {product.description}
+    </p>
+</f:section>

@@ -8,11 +8,11 @@ call_user_func(function () {
         'StefanFroemken.Sfmailshop',
         'MailShop',
         [
-            'Shop' => 'list, cart, clearCart, checkout',
+            'Shop' => 'list, search, cart, clearCart, checkout',
         ],
         // non-cacheable actions
         [
-            'Shop' => 'cart, clearCart, checkout',
+            'Shop' => 'search, cart, clearCart, checkout',
         ]
     );
 

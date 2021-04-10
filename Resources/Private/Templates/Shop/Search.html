@@ -9,6 +9,10 @@
     <div class="frame-layout-100 text-right">
         <div class="grid">
             <div class="col-6 text-left">
+                <f:link.action action="list" controller="Shop">
+                    Zurück zu den Produkten
+                </f:link.action>
+                <br>
                 <f:link.action action="clearCart" controller="Shop">
                     Warenkorb leeren
                 </f:link.action>
@@ -19,15 +23,13 @@
             </div>
             <div class="col-6 text-right">
                 <f:form action="search" controller="Shop">
-                    <f:form.textfield name="search" placeholder="Shop durchsuchen" />
+                    <f:form.textfield name="search" placeholder="Shop durchsuchen" value="{search}" />
                 </f:form>
             </div>
         </div>
     </div>
 
-    <f:widget.paginate objects="{products}" as="paginatedProducts">
-        <f:render partial="ListProducts" arguments="{products: paginatedProducts}"/>
-    </f:widget.paginate>
+    <f:render partial="ListProducts" arguments="{products: products}"/>
 
     <div class="frame-layout-100 text-right">
         <f:link.action action="cart" controller="Shop">

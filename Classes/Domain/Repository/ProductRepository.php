@@ -46,4 +46,16 @@ class ProductRepository extends Repository
         'isTopProduct' => QueryInterface::ORDER_DESCENDING,
         'title' => QueryInterface::ORDER_ASCENDING
     ];
+
+    public function findBySearch(string $search): QueryResultInterface
+    {
+        $query = $this->createQuery();
+
+        $constraint = [];
+        $constraint[] = $query->like('title', '%' . $search . '%');
+        $constraint[] = $query->like('articleNumber', '%' . $search . '%');
+        $constraint[] = $query->like('description', '%' . $search . '%');
+
+        return $query->matching($query->logicalOr($constraint))->execute();
+    }
 }
