@@ -12,9 +12,8 @@ SfMailShop.addClickEventToAddToCart = function() {
         $element = $(this);
         jQuery.ajax({
             method: "POST",
-            url: $(this).data('host') + "/index.php",
+            url: $(this).data('host') + "/index.php?id=" + $(this).data('pageId'),
             data: {
-                id: $(this).data('pageId'),
                 tx_sfmailshop: {
                     productUid: $(this).data('productUid'),
                     variantUid: $(this).data('variantUid'),

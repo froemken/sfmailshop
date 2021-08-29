@@ -53,7 +53,7 @@ class ShopController extends ActionController
     public function initializeView(ViewInterface $view)
     {
         $view->assign('host', GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST'));
-        $view->assign('pageId', GeneralUtility::getIndpEnv($this->getTypoScriptFrontendController()->id));
+        $view->assign('pageId', $this->getTypoScriptFrontendController()->id);
     }
 
     public function listAction()
