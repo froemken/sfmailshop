@@ -14,6 +14,8 @@ namespace StefanFroemken\Sfmailshop\Configuration;
  *
  * The TYPO3 project - inspiring people to share!
  */
+
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\SingletonInterface;
 
 /**
@@ -46,22 +48,15 @@ class ExtConf implements SingletonInterface
      */
     protected $emailSubject = '';
 
-    public function __construct()
+    public function __construct(ExtensionConfiguration $extensionConfiguration)
     {
-        // On a fresh installation this value can be null.
-        if (isset($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sfmailshop'])) {
-            // get global configuration
-            $extConf = unserialize(
-                $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sfmailshop'],
-                ['allowed_classes' => false]
-            );
-            if (is_array($extConf) && count($extConf)) {
-                // call setter method foreach configuration entry
-                foreach ($extConf as $key => $value) {
-                    $methodName = 'set' . ucfirst($key);
-                    if (method_exists($this, $methodName)) {
-                        $this->$methodName($value);
-                    }
+        $extConf = $extensionConfiguration->get('sfmailshop');
+        if (is_array($extConf) && count($extConf)) {
+            // call setter method foreach configuration entry
+            foreach ($extConf as $key => $value) {
+                $methodName = 'set' . ucfirst($key);
+                if (method_exists($this, $methodName)) {
+                    $this->$methodName($value);
                 }
             }
         }

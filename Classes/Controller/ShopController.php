@@ -1,6 +1,6 @@
 <?php
+
 declare(strict_types = 1);
-namespace StefanFroemken\Sfmailshop\Controller;
 
 /*
  * This file is part of the sfmailshop project.
@@ -14,6 +14,8 @@ namespace StefanFroemken\Sfmailshop\Controller;
  *
  * The TYPO3 project - inspiring people to share!
  */
+
+namespace StefanFroemken\Sfmailshop\Controller;
 
 use StefanFroemken\Sfmailshop\Configuration\ExtConf;
 use StefanFroemken\Sfmailshop\Domain\Model\Order\Cart;
@@ -45,7 +47,6 @@ class ShopController extends ActionController
         \StefanFroemken\Sfmailshop\Domain\Repository\ProductRepository $productRepository,
         \StefanFroemken\Sfmailshop\Domain\Repository\VariantRepository $variantRepository
     ) {
-        parent::__construct();
         $this->productRepository = $productRepository;
         $this->variantRepository = $variantRepository;
     }
