@@ -22,9 +22,6 @@ return [
         'searchFields' => 'title',
         'iconfile' => 'EXT:sfmailshop/Resources/Public/Icons/tx_sfmailshop_domain_model_variant.png',
     ],
-    'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title',
-    ],
     'types' => [
         '1' => [
             'showitem' => '--palette--;;l10nHidden, l10n_parent, l10n_diffsource, title,
