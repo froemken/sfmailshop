@@ -144,7 +144,7 @@ class ShopController extends ActionController
             $mail->addTo($emailToAddress, $extConf->getEmailToName());
         }
         $mail->setSubject($extConf->getEmailSubject());
-        $mail->setBody($this->view->render(), 'text/html');
+        $mail->html($this->view->render());
         $mail->send();
         $this->addFlashMessage(
             LocalizationUtility::translate('messageOrderReceivedDescription', 'Sfmailshop'),
