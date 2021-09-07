@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <f:render partial="ListProducts" arguments="{products: products}"/>
+    <f:render partial="ListProducts" arguments="{pageId: pageId, host: host, products: products}"/>
 
     <div class="frame-layout-100 text-right">
         <f:link.action action="cart" controller="Shop">
