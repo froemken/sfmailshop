@@ -59,7 +59,7 @@ class Variant extends AbstractEntity
     /**
      * Manual filled sizes
      *
-     * @var null|array|Size[]
+     * @var array|null
      */
     protected $sizes = null;
 
