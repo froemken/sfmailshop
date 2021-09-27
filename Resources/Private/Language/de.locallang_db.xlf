@@ -7,6 +7,10 @@
 				<source>SF Mail Shop</source>
 				<target>SF Mail Shop</target>
 			</trans-unit>
+			<trans-unit id="plugin.sfmailshop.description" xml:space="preserve">
+				<source>Shows a list of products</source>
+				<target>Zeigt eine Auflistung von Produkten</target>
+			</trans-unit>
 
 			<trans-unit id="tx_sfmailshop_domain_model_product" xml:space="preserve">
 				<source>Product</source>

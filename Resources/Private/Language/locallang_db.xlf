@@ -6,6 +6,9 @@
 			<trans-unit id="plugin.sfmailshop.title" xml:space="preserve">
 				<source>SF Mail Shop</source>
 			</trans-unit>
+			<trans-unit id="plugin.sfmailshop.description" xml:space="preserve">
+				<source>Shows a list of products</source>
+			</trans-unit>
 
 			<trans-unit id="tx_sfmailshop_domain_model_product" xml:space="preserve">
 				<source>Product</source>

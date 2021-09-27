@@ -1,0 +1,16 @@
+mod.wizards.newContentElement.wizardItems.plugins {
+  elements {
+    sfmailshop {
+      iconIdentifier = ext-sfmailshop-wizard-icon
+      title = LLL:EXT:sfmailshop/Resources/Private/Language/locallang_db.xlf:plugin.sfmailshop.title
+      description = LLL:EXT:sfmailshop/Resources/Private/Language/locallang_db.xlf:plugin.sfmailshop.description
+      tt_content_defValues {
+        CType = list
+        list_type = sfmailshop_mailshop
+      }
+    }
+  }
+}
+
+# Add CType Preview
+mod.web_layout.tt_content.preview.list.sfmailshop_mailshop = EXT:sfmailshop/Resources/Private/Templates/PluginPreview/Sfmailshop.html
