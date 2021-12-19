@@ -143,7 +143,12 @@ class ShopController extends ActionController
         foreach (GeneralUtility::trimExplode(',', $extConf->getEmailToAddress(), true) as $emailToAddress) {
             $mail->addTo($emailToAddress, $extConf->getEmailToName());
         }
-        $mail->setSubject($extConf->getEmailSubject());
+        $mail->setSubject(sprintf(
+            '%s %s - %s',
+            $cart->getFirstName(),
+            $cart->getLastName(),
+            $extConf->getEmailSubject()
+        ));
         $mail->html($this->view->render());
         $mail->send();
         $this->addFlashMessage(
